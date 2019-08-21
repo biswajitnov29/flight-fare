@@ -13,15 +13,12 @@ import { Place } from './model/Place';
 })
 export class AppComponent implements AfterViewInit {
 
-
-  title = 'Flight fare';
-
   calendarPlugins = [dayGridPlugin];
   flightList: any[] = [];
-  originPlace: string = "KULM-sky";
-  destinationPlace: string = "SINS-sky";
+  originPlace: Place = FlightFareConstant.placeList.filter(i => i.placeId == "KULM-sky")[0];
+  destinationPlace: Place = FlightFareConstant.placeList.filter(i => i.placeId == "SINS-sky")[0];
 
-  placeList:Place[]=FlightFareConstant.placeList;
+  placeList: Place[] = FlightFareConstant.placeList;
   constructor(
     private skyscannerService: SkyscannerService,
     private appDataService: AppDataService) {
@@ -29,18 +26,11 @@ export class AppComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    let currDate = moment(new Date()).startOf("days");
-    let endDate = currDate.clone().add(FlightFareConstant.noOfDaysToFetchData, "days").startOf("days");
-
-    while (currDate.add(1, 'days').diff(endDate) < 0) {
-      console.log(currDate.toDate());
-      this.FetchFlightDetails(currDate.clone());
-    }
-    console.log(this.flightList);
+    this.SearchFlightFares();
   }
 
   public FetchFlightDetails(date: moment.Moment) {
-    this.skyscannerService.CreateSession(this.originPlace, this.destinationPlace, date.format(FlightFareConstant.dateFormat))
+    this.skyscannerService.CreateSession(this.originPlace.placeId, this.destinationPlace.placeId, date.format(FlightFareConstant.dateFormat))
       .subscribe(resp => {
         if (resp) {
           let location = resp.headers.get("Location");
@@ -48,13 +38,13 @@ export class AppComponent implements AfterViewInit {
           let sessionKey = locationSplit.length > 0 ? locationSplit[locationSplit.length - 1] : null;
           this.skyscannerService.PollSessionResult(sessionKey)
             .subscribe((data: any) => {
-              this.FormatData(data,date);
+              this.FormatData(data, date);
             })
         }
       });
   }
 
-  public FormatData(data: any,date: moment.Moment) {
+  public FormatData(data: any, date: moment.Moment) {
     let minPrice = this.appDataService.FindMinimumPrice(data.Itineraries);
     let legsDetails = this.appDataService.FindLegsDetails(minPrice.OutboundLegId, data.Legs);
     let title = "";
@@ -71,5 +61,23 @@ export class AppComponent implements AfterViewInit {
     });
   }
 
+  UpdateToPlace(placeId: string) {
+    this.destinationPlace = FlightFareConstant.placeList.filter(i => i.placeId == placeId)[0];
+  }
+
+  UpdateFromPlace(placeId: string) {
+    this.originPlace = FlightFareConstant.placeList.filter(i => i.placeId == placeId)[0];
+  }
+
+  SearchFlightFares() {
+    if (this.originPlace.placeId != this.destinationPlace.placeId) {
+      this.flightList = [];
+      let currDate = moment(new Date()).startOf("days");
+      let endDate = currDate.clone().add(FlightFareConstant.noOfDaysToFetchData, "days").startOf("days");
+      while (currDate.add(1, 'days').diff(endDate) < 0) {
+        this.FetchFlightDetails(currDate.clone());
+      }
+    }
+  }
 
 }
