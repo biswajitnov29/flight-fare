@@ -11,9 +11,8 @@ export class SkyscannerService {
   constructor(private http: HttpClient,
     private appDataService:AppDataService) { }
 
-  public CreateSession(originPlace: string, destinationPlace: string) {
-    let data=this.appDataService.GenerateDataForCreateSession(originPlace,destinationPlace);
-    console.log(data);
+  public CreateSession(originPlace: string, destinationPlace: string,outboundDate:string) {
+    let data=this.appDataService.GenerateDataForCreateSession(originPlace,destinationPlace,outboundDate);
     return this.http.post(FlightFareConstant.create_session_api, data, {
       headers: {
         "x-rapidapi-host": FlightFareConstant.x_rapidapi_host,

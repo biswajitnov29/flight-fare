@@ -1,13 +1,32 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="container">
 
+  <section class="rightSection">
+    <h2 >Flight Search</h2>
+    <div class="formSection">
+      <form>
+          <label for="from">From</label>
+          <select id="from" name="from">
+            <option *ngFor="let place of placeList" value="{{place.placeId}}">{{place.placeName}}</option>
+          </select>
 
-<full-calendar
-  defaultView="dayGridMonth"
-  [plugins]="calendarPlugins"
-  [weekends]="false"
-  [events]="flightList"
-></full-calendar>
-<router-outlet></router-outlet>
+        <label for="to">To</label>
+        <select id="to" name="to">
+          <option value="australia">Australia</option>
+          <option value="canada">Canada</option>
+          <option value="usa">USA</option>
+        </select>
+
+        <input type="submit" value="Search">
+      </form>
+    </div>
+  </section>
+  <section class="leftSection">
+    <full-calendar defaultView="dayGridMonth" [plugins]="calendarPlugins" [weekends]="false" deepChangeDetection="true"
+      [events]="flightList"></full-calendar>
+  </section>
+
+
+  <router-outlet></router-outlet>
 
 </div>
