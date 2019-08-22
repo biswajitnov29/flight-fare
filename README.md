@@ -3,24 +3,46 @@ Display flights fares for selected month in calendar view
 
 ## Table of contents
 
-- [What's included](#whats-included)
+- [Feature's included](#features-included)
+- [Dependencies](#dependencies)
 - [Project Setup](#project-setup)
 - [Run Application](#run-application)
 - [Build Application](#build-application)
 - [Running Unit Tests](#running-unit-tests)
 
-## What's included
+## Feature's included
 
-- [x] CRUD: create, update and remove heroes with Firebase
+- [x] Search flight with lowest price for routes between these cities,
+  - Singapore,
+  - Kuala Lumpur,
+  - San Francisco International,
+- [x] Validate `From` and `To` place, so that these should not be same,
+- [x] Component based project structure,
+- [x] Integrated Full Calendar (https://fullcalendar.io/) with Angular,
+- [x] Integrated Skyscanner Flight Search API with Angular, 
+- [x] Common service for all re-usable code,
+- [x] Unit test with jasmine and karma.
+
+## Dependencies:
+
+- Angular – Latest version (8.2.2),
+- Full-Calendar – 4.3.1,
+- Moment –2.24,
+- Rxjs,
+- Zone.js,
+- Karma,
+- Jasmine,
+- Typescrip
 
 ## Project Setup
 
-- Go inside the project folder,
-- Run the bewlow command in `Node Command Prompt` to install project dependencies 
+- Download and install Node.js (https://nodejs.org/en/) to your computer,
+- Open `Node Command Prompt` and run command `npm  –v` to check node version,
+- Run command ` npm install -g @angular/cli ` to install angular-cli,
+- Angular-Cli helps to create/run/build project,
+- Select project directory in `Node Command Prompt` and run `ng –v’ to check version,
+- Run ` npm install ` to install all project dependencies.
 
- ```bash
- npm i
- ```
 ## Run Application
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
