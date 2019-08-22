@@ -1,6 +1,10 @@
 # Flight Fare
 Display flights fares for selected month in calendar view
 
+ ```bash
+ This Application worked best in Chrome browser
+ ```
+
 ## Table of contents
 
 - [Feature's included](#features-included)
@@ -46,6 +50,10 @@ Display flights fares for selected month in calendar view
 ## Run Application
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+ ```bash
+ This Application worked best in Chrome browser
+ ```
 
 ## Build Application
 
