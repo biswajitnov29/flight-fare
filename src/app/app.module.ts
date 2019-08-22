@@ -7,6 +7,9 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+/** 
+* App Module 
+*/
 @NgModule({
   declarations: [
     AppComponent

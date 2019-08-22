@@ -6,16 +6,19 @@
     <div class="formSection">
       <form>
           <label for="from">From</label>
-          <select id="from" name="from" (change)="UpdateFromPlace($event.target.value)" [ngModel]="originPlace.placeId">
+          <select id="from" name="from" 
+          (change)="UpdateFromPlace($event.target.value)" 
+          [ngModel]="originPlace?.placeId">
             <option *ngFor="let place of placeList" (click)="UpdateFromPlace(place)" value="{{place.placeId}}">{{place.placeName}}</option>
           </select>
 
         <label for="to">To</label>
-        <select id="to" name="to" (change)="UpdateToPlace($event.target.value)" [ngModel]="destinationPlace.placeId">
+        <select id="to" name="to" (change)="UpdateToPlace($event.target.value)" 
+        [ngModel]="destinationPlace?.placeId">
           <option *ngFor="let place of placeList" value="{{place.placeId}}">{{place.placeName}}</option>
         </select>
-        <input type="button" [disabled]="originPlace.placeId==destinationPlace.placeId" value="Search" (click)="SearchFlightFares()">
-        <span *ngIf="originPlace.placeId==destinationPlace.placeId" style="color: red;">From and To location cann't be same.</span>
+        <input type="button" [disabled]="originPlace?.placeId==destinationPlace?.placeId" value="Search" (click)="SearchFlightFares()">
+        <span *ngIf="originPlace?.placeId==destinationPlace?.placeId" style="color: red;">From and To location cann't be same.</span>
       </form>
     </div>
   </section>

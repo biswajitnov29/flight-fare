@@ -6,6 +6,9 @@ import * as moment from 'moment';
 import { FlightFareConstant } from './config/app.constant';
 import { Place } from './model/Place';
 
+/**
+ * App Component
+ */
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,9 +18,14 @@ export class AppComponent implements AfterViewInit {
 
   calendarPlugins = [dayGridPlugin];
   flightList: any[] = [];
+  /**
+   * Default Origin place 
+   */
   originPlace: Place = FlightFareConstant.placeList.filter(i => i.placeId == "KULM-sky")[0];
   destinationPlace: Place = FlightFareConstant.placeList.filter(i => i.placeId == "SINS-sky")[0];
-
+  /**
+   * Place list to search flight details
+   */
   placeList: Place[] = FlightFareConstant.placeList;
   constructor(
     private skyscannerService: SkyscannerService,
@@ -29,6 +37,10 @@ export class AppComponent implements AfterViewInit {
     this.SearchFlightFares();
   }
 
+  /**
+   * Fetch flight details based on date
+   * @param date Find flight details on that date
+   */
   public FetchFlightDetails(date: moment.Moment) {
     this.skyscannerService.CreateSession(this.originPlace.placeId, this.destinationPlace.placeId, date.format(FlightFareConstant.dateFormat))
       .subscribe(resp => {
@@ -44,6 +56,11 @@ export class AppComponent implements AfterViewInit {
       });
   }
 
+  /**
+   * Format poll result based on current date
+   * @param data Poll result data
+   * @param date Current date
+   */
   public FormatData(data: any, date: moment.Moment) {
     let minPrice = this.appDataService.FindMinimumPrice(data.Itineraries);
     let legsDetails = this.appDataService.FindLegsDetails(minPrice.OutboundLegId, data.Legs);
@@ -61,21 +78,33 @@ export class AppComponent implements AfterViewInit {
     });
   }
 
+  /**
+   * Update To place
+   * @param placeId To place value 
+   */
   UpdateToPlace(placeId: string) {
     this.destinationPlace = FlightFareConstant.placeList.filter(i => i.placeId == placeId)[0];
   }
 
+  /**
+   * Update From place
+   * @param placeId From place value
+   */
   UpdateFromPlace(placeId: string) {
     this.originPlace = FlightFareConstant.placeList.filter(i => i.placeId == placeId)[0];
   }
 
+  /**
+   * Search flight fare for respective To and From for next 30 days
+   */
   SearchFlightFares() {
     if (this.originPlace.placeId != this.destinationPlace.placeId) {
       this.flightList = [];
       let currDate = moment(new Date()).startOf("days");
-      let endDate = currDate.clone().add(FlightFareConstant.noOfDaysToFetchData, "days").startOf("days");
-      while (currDate.add(1, 'days').diff(endDate) < 0) {
+      let endDate = currDate.clone().add(1, "month").startOf("days");
+      while (currDate.diff(endDate) < 0) {
         this.FetchFlightDetails(currDate.clone());
+        currDate.add(1, 'days');
       }
     }
   }

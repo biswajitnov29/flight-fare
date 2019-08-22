@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { FlightFareConstant } from '../config/app.constant';
 
+/**
+ * Application data service to re-use code
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -8,6 +11,12 @@ export class AppDataService {
 
   constructor() { }
 
+  /**
+   * Generate data string to create session key
+   * @param originPlace Origin place placeId
+   * @param destinationPlace Destination place placeId
+   * @param outboundDate Current Date
+   */
   public GenerateDataForCreateSession(originPlace: string, destinationPlace: string,outboundDate:string) {
     let data = "inboundDate=&" +
       "cabinClass=" + FlightFareConstant.default_data.cabinClass +
@@ -24,6 +33,10 @@ export class AppDataService {
     return data;
   }
 
+  /**
+   * Find minimum price from list of Iternary
+   * @param itineraries Iternary list 
+   */
   public FindMinimumPrice(itineraries: any) {
     let minPrice: any = {
       OutboundLegId: "",
@@ -53,6 +66,11 @@ export class AppDataService {
   }
 
 
+  /**
+   * Find Leg's details based on Iternary Id
+   * @param outBoundId Iternary outBoundId
+   * @param legs List of Legs
+   */
   public FindLegsDetails(outBoundId:string,legs:any){
     let legDetails=null;
     legs.forEach((leg:any) => {
@@ -63,6 +81,11 @@ export class AppDataService {
     return legDetails;
   }
 
+  /**
+   * Find carrier's details based on carrier Id
+   * @param carrierId Carrier Id
+   * @param carriers List of carrier
+   */
   public FindCarrier(carrierId:number,carriers:any[]){
     let carrierDetails={};
     carriers.forEach((carrier:any) =>{

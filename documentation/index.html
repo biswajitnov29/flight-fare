@@ -1,0 +1,152 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>flight-fare documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	      <link rel="stylesheet" href="./styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="./" class="navbar-brand">flight-fare documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content getting-started">
+                   <div class="content-data">
+
+<h1 id="flight-fare">Flight Fare</h1>
+<p>Display flights fares for selected month in calendar view</p>
+<div><pre class="line-numbers"><code class="language-bash"> This Application worked best in Chrome browser</code></pre></div><h2 id="table-of-contents">Table of contents</h2>
+<ul>
+<li><a href="#features-included">Feature&#39;s included</a></li>
+<li><a href="#dependencies">Dependencies</a></li>
+<li><a href="#project-setup">Project Setup</a></li>
+<li><a href="#run-application">Run Application</a></li>
+<li><a href="#build-application">Build Application</a></li>
+<li><a href="#running-unit-tests">Running Unit Tests</a></li>
+</ul>
+<h2 id="features-included">Feature&#39;s included</h2>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> Search flight with lowest price for routes between these cities,<ul>
+<li>Singapore,</li>
+<li>Kuala Lumpur,</li>
+<li>San Francisco International,</li>
+</ul>
+</li>
+<li><input checked="" disabled="" type="checkbox"> Validate <code>From</code> and <code>To</code> place, so that these should not be same,</li>
+<li><input checked="" disabled="" type="checkbox"> Component based project structure,</li>
+<li><input checked="" disabled="" type="checkbox"> Integrated Full Calendar (<a href="https://fullcalendar.io/">https://fullcalendar.io/</a>) with Angular,</li>
+<li><input checked="" disabled="" type="checkbox"> Integrated Skyscanner Flight Search API with Angular, </li>
+<li><input checked="" disabled="" type="checkbox"> Common service for all re-usable code,</li>
+<li><input checked="" disabled="" type="checkbox"> Unit test with jasmine and karma.</li>
+</ul>
+<h2 id="dependencies">Dependencies:</h2>
+<ul>
+<li>Angular – Latest version (8.2.2),</li>
+<li>Full-Calendar – 4.3.1,</li>
+<li>Moment –2.24,</li>
+<li>Rxjs,</li>
+<li>Zone.js,</li>
+<li>Karma,</li>
+<li>Jasmine,</li>
+<li>Typescrip</li>
+</ul>
+<h2 id="project-setup">Project Setup</h2>
+<ul>
+<li>Download and install Node.js (<a href="https://nodejs.org/en/">https://nodejs.org/en/</a>) to your computer,</li>
+<li>Open <code>Node Command Prompt</code> and run command <code>npm  –v</code> to check node version,</li>
+<li>Run command <code>npm install -g @angular/cli</code> to install angular-cli,</li>
+<li>Angular-Cli helps to create/run/build project,</li>
+<li>Select project directory in <code>Node Command Prompt</code> and run `ng –v’ to check version,</li>
+<li>Run <code>npm install</code> to install all project dependencies.</li>
+</ul>
+<h2 id="run-application">Run Application</h2>
+<p>Run <code>ng serve</code> for a dev server. Navigate to <code>http://localhost:4200/</code>. The app will automatically reload if you change any of the source files.</p>
+<div><pre class="line-numbers"><code class="language-bash"> This Application worked best in Chrome browser</code></pre></div><h2 id="build-application">Build Application</h2>
+<p>Run <code>ng build</code> to build the project. The build artifacts will be stored in the <code>dist/</code> directory. Use the <code>--prod</code> flag for a production build.</p>
+<h2 id="running-unit-tests">Running unit tests</h2>
+<p>Run <code>ng test</code> to execute the unit tests via <a href="https://karma-runner.github.io">Karma</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
+            var COMPODOC_CURRENT_PAGE_URL = 'index.html';
+       </script>
+
+       <script src="./js/libs/custom-elements.min.js"></script>
+       <script src="./js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="./js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="./js/menu-wc.js" defer></script>
+
+       <script src="./js/libs/bootstrap-native.js"></script>
+
+       <script src="./js/libs/es6-shim.min.js"></script>
+       <script src="./js/libs/EventDispatcher.js"></script>
+       <script src="./js/libs/promise.min.js"></script>
+       <script src="./js/libs/zepto.min.js"></script>
+
+       <script src="./js/compodoc.js"></script>
+
+       <script src="./js/tabs.js"></script>
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/clipboard.min.js"></script>
+       <script src="./js/libs/prism.js"></script>
+       <script src="./js/sourceCode.js"></script>
+          <script src="./js/search/search.js"></script>
+          <script src="./js/search/lunr.min.js"></script>
+          <script src="./js/search/search-lunr.js"></script>
+          <script src="./js/search/search_index.js"></script>
+       <script src="./js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
