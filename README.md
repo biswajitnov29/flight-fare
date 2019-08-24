@@ -32,14 +32,15 @@ Display flights fares for selected month in calendar view
 
 ## Dependencies:
 
-- Angular – Latest version (8.2.2),
-- Full-Calendar – 4.3.1,
-- Moment –2.24,
+- Angular ,
+- Full-Calendar (https://fullcalendar.io/),
+- Moment (https://momentjs.com/),
 - Rxjs,
 - Zone.js,
 - Karma,
 - Jasmine,
-- Typescrip
+- Typescript
+- Protector (https://www.protractortest.org/#/)
 
 ## Project Setup
 
