@@ -13,6 +13,7 @@ Display flights fares for selected month in calendar view
 - [Run Application](#run-application)
 - [Build Application](#build-application)
 - [Running Unit Tests](#running-unit-tests)
+- [Running e2e tests] (#running-e2e-tests)
 
 ## Feature's included
 
@@ -25,7 +26,9 @@ Display flights fares for selected month in calendar view
 - [x] Integrated Full Calendar (https://fullcalendar.io/) with Angular,
 - [x] Integrated Skyscanner Flight Search API with Angular, 
 - [x] Common service for all re-usable code,
-- [x] Unit test with jasmine and karma.
+- [x] Notification alert when error occure in rest service ( Using Angular Animation ),
+- [x] Unit test with jasmine and karma,
+- [x] Configure End-To-End testing with tested test-case. 
 
 ## Dependencies:
 
@@ -62,3 +65,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running e2e tests
+
+Run `ng e2e` to execute the end-to-end test cases.
