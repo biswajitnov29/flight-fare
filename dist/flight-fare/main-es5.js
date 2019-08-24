@@ -360,7 +360,7 @@ module.exports = "<div class=\"notificationbar\" [@changeVisibility]=\"currentSt
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h2 >Flight Search</h2>\n<div class=\"formSection\">\n  <form>\n    <label for=\"from\">Source</label>\n    <select id=\"from\" name=\"from\" (change)=\"UpdateFromPlace($event.target.value)\" [ngModel]=\"originPlace?.placeId\">\n      <option *ngFor=\"let place of placeList\" (click)=\"UpdateFromPlace(place)\" value=\"{{place.placeId}}\">\n        {{place.placeName}}</option>\n    </select>\n\n    <label for=\"to\">Destination</label>\n    <select id=\"to\" name=\"to\" (change)=\"UpdateToPlace($event.target.value)\" [ngModel]=\"destinationPlace?.placeId\">\n      <option *ngFor=\"let place of placeList\" value=\"{{place.placeId}}\">{{place.placeName}}</option>\n    </select>\n    <input type=\"button\" [disabled]=\"originPlace?.placeId==destinationPlace?.placeId\" value=\"Search\"\n      (click)=\"SearchFlightFares()\">\n    <span *ngIf=\"originPlace?.placeId==destinationPlace?.placeId\" style=\"color: red;\">From and To location cann't be\n      same.</span>\n  </form>\n</div>\n"
+module.exports = "<h2>Flight Search</h2>\n<div class=\"formSection\">\n  <form>\n    <label for=\"from\">Source</label>\n    <select id=\"from\" name=\"from\" (change)=\"UpdateFromPlace($event.target.value)\" [ngModel]=\"originPlace?.placeId\">\n      <option *ngFor=\"let place of placeList\" (click)=\"UpdateFromPlace(place)\" value=\"{{place.placeId}}\">\n        {{place.placeName}}</option>\n    </select>\n\n    <label for=\"to\">Destination</label>\n    <select id=\"to\" name=\"to\" (change)=\"UpdateToPlace($event.target.value)\" [ngModel]=\"destinationPlace?.placeId\">\n      <option *ngFor=\"let place of placeList\" value=\"{{place.placeId}}\">{{place.placeName}}</option>\n    </select>\n    <input type=\"button\" [disabled]=\"originPlace?.placeId==destinationPlace?.placeId\" value=\"Search\"\n      (click)=\"SearchFlightFares()\">\n    <span *ngIf=\"originPlace?.placeId==destinationPlace?.placeId\" style=\"color: red;\">From and To location cann't be\n      same.</span>\n  </form>\n</div>\n"
 
 /***/ }),
 
@@ -396,6 +396,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 var AppComponent = /** @class */ (function () {
     function AppComponent() {
+        this.title = "Welcome to flight-fare!";
         /**
          * Calender day grid plugin
          */

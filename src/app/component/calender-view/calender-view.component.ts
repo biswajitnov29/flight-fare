@@ -20,8 +20,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class CalenderViewComponent implements OnInit {
 
-  currDate = moment(new Date()).startOf("days");
-  endDate = this.currDate.clone().add(1, "month").startOf("days");
+  
   calendarPlugins = [dayGridPlugin];
   flightList: any[] = [];
   /**
@@ -53,13 +52,15 @@ export class CalenderViewComponent implements OnInit {
    */
   SearchFlightFares() {
     if (this.originPlace.placeId != this.destinationPlace.placeId) {
+      let currDate = moment(new Date()).startOf("days");
+      let endDate = currDate.clone().add(1, "month").startOf("days");
       this.messageService.sendMessage(new AppMessage(GlobalMessages.displayPageLoader, {}));
       let observableList: Observable<any>[] = [];
       this.flightList = [];
 
-      while (this.currDate.diff(this.endDate) < 0) {
-        observableList.push(this.FetchFlightDetails(this.currDate.clone()));
-        this.currDate.add(1, 'days');
+      while (currDate.diff(endDate) < 0) {
+        observableList.push(this.FetchFlightDetails(currDate.clone()));
+        currDate.add(1, 'days');
       }
 
       forkJoin(observableList).subscribe((dataList: any[]) => {
@@ -76,7 +77,14 @@ export class CalenderViewComponent implements OnInit {
             messageType: NotificationType.Error,
             message: error.error
           }));
-        } else {
+        } else if(error.status == 429){
+          if(error.error.ValidationErrors.length>0){
+            this.messageService.sendMessage(new AppMessage(GlobalMessages.showNotification, {
+              messageType: NotificationType.Error,
+              message: error.error.ValidationErrors[0]
+            }));
+          }
+        }else {
           this.messageService.sendMessage(new AppMessage(GlobalMessages.showNotification, {
             messageType: NotificationType.Error,
             message: error.message

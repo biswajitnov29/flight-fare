@@ -6,11 +6,13 @@ describe('workspace-project App', () => {
 
   beforeEach(() => {
     page = new AppPage();
+    browser.ignoreSynchronization=true;
+    browser.waitForAngularEnabled(false);
   });
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to flight-fare!');
+    expect(page.getTitleText()).toEqual('Flight Search');
   });
 
   afterEach(async () => {

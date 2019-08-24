@@ -13,6 +13,7 @@ import { Place } from './model/Place';
 })
 export class AppComponent implements AfterViewInit {
 
+  title:string="Welcome to flight-fare!";
   /**
    * Calender day grid plugin
    */
