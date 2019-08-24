@@ -5,6 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { HttpClientModule } from '@angular/common/http';
 import { By } from '@angular/platform-browser';
+import { CalenderViewComponent } from 'src/app/component/calender-view/calender-view.component';
+import { SearchViewComponent } from 'src/app/component/search-view/search-view.component';
+import { MessageService } from 'src/app/service/message.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -16,8 +19,11 @@ describe('AppComponent', () => {
         FullCalendarModule
       ],
       declarations: [
+        CalenderViewComponent,
+        SearchViewComponent,
         AppComponent
       ],
+      providers: [MessageService]
     }).compileComponents();
   }));
 
@@ -27,30 +33,18 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render calender', () => {
+  it('should render app-search-view', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('full-calendar')).toBeTruthy();
+    expect(compiled.querySelector('app-search-view')).toBeTruthy();
   });
 
-  it(`should have default value of originPlace is 'KULM-sky'`, () => {
+  it('should render app-calender-view', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.originPlace.placeId).toEqual('KULM-sky');
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('app-calender-view')).toBeTruthy();
   });
 
-  it(`should have default value of destinationPlace is 'SINS-sky'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.destinationPlace.placeId).toEqual('SINS-sky');
-  });
-
-  it(`should contain list of placeList `, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.placeList.length).toBeGreaterThan(0);
-  });
-
-  
 });

@@ -6,13 +6,17 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CalenderViewComponent } from './component/calender-view/calender-view.component';
+import { SearchViewComponent } from './component/search-view/search-view.component';
+import { MessageService } from 'src/app/service/message.service';
+import { LoaderViewComponent } from './component/loader-view/loader-view.component';
 
-/** 
-* App Module 
-*/
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CalenderViewComponent,
+    SearchViewComponent,
+    LoaderViewComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +25,7 @@ import { AppComponent } from './app.component';
     FullCalendarModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

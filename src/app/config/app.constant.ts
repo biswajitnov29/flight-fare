@@ -27,7 +27,8 @@ export class FlightFareConstant {
 
     static dateFormat: string = "YYYY-MM-DD";
     static noOfDaysToFetchData: number = 20;
-
+    static defaultSourcePlaceId:string="KULM-sky";
+    static defaultDestinationPlaceId:string="SINS-sky";
     static placeList: Place[] = [
         {
             placeId: "KULM-sky",
@@ -54,5 +55,7 @@ export class FlightFareConstant {
             countryName: "United States",
         }
     ];
+
+    static failedServiceNoOfRetry:number=5;
 }
 

@@ -1,33 +1,10 @@
 <!--The content below is only a placeholder and can be replaced.-->
+<app-loader-view></app-loader-view>
 <div class="container">
-
   <section class="rightSection">
-    <h2 >Flight Search</h2>
-    <div class="formSection">
-      <form>
-          <label for="from">From</label>
-          <select id="from" name="from" 
-          (change)="UpdateFromPlace($event.target.value)" 
-          [ngModel]="originPlace?.placeId">
-            <option *ngFor="let place of placeList" (click)="UpdateFromPlace(place)" value="{{place.placeId}}">{{place.placeName}}</option>
-          </select>
-
-        <label for="to">To</label>
-        <select id="to" name="to" (change)="UpdateToPlace($event.target.value)" 
-        [ngModel]="destinationPlace?.placeId">
-          <option *ngFor="let place of placeList" value="{{place.placeId}}">{{place.placeName}}</option>
-        </select>
-        <input type="button" [disabled]="originPlace?.placeId==destinationPlace?.placeId" value="Search" (click)="SearchFlightFares()">
-        <span *ngIf="originPlace?.placeId==destinationPlace?.placeId" style="color: red;">From and To location cann't be same.</span>
-      </form>
-    </div>
+    <app-search-view ></app-search-view>
   </section>
   <section class="leftSection">
-    <full-calendar defaultView="dayGridMonth" [plugins]="calendarPlugins" [weekends]="false" deepChangeDetection="true"
-      [events]="flightList"></full-calendar>
+    <app-calender-view ></app-calender-view>
   </section>
-
-
-  <router-outlet></router-outlet>
-
 </div>
