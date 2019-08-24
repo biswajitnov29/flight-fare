@@ -1,2 +1,6 @@
-<full-calendar defaultView="dayGridMonth" [plugins]="calendarPlugins" [weekends]="false" deepChangeDetection="true"
-      [events]="flightList"></full-calendar>
+<full-calendar defaultView="dayGridMonth" 
+[visibleRange]="visibleDateRange" 
+[plugins]="calendarPlugins"
+[handleWindowResize]="true" 
+[weekends]="true" deepChangeDetection="true" [events]="flightList">
+</full-calendar>

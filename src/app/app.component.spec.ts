@@ -8,11 +8,15 @@ import { By } from '@angular/platform-browser';
 import { CalenderViewComponent } from 'src/app/component/calender-view/calender-view.component';
 import { SearchViewComponent } from 'src/app/component/search-view/search-view.component';
 import { MessageService } from 'src/app/service/message.service';
+import { NotificationViewComponent } from './component/notification-view/notification-view.component';
+import { LoaderViewComponent } from './component/loader-view/loader-view.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
+        BrowserAnimationsModule,
         RouterTestingModule,
         FormsModule,
         HttpClientModule,
@@ -21,6 +25,8 @@ describe('AppComponent', () => {
       declarations: [
         CalenderViewComponent,
         SearchViewComponent,
+        LoaderViewComponent,
+        NotificationViewComponent,
         AppComponent
       ],
       providers: [MessageService]

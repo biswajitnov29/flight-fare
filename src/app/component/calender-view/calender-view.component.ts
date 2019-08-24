@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, Input, OnChanges, SimpleChanges, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { Place } from 'src/app/model/Place';
@@ -8,7 +8,7 @@ import { AppDataService } from 'src/app/service/app.data.service';
 import { MessageService } from 'src/app/service/message.service';
 import { GlobalMessages } from 'src/app/config/globalMessages.model';
 import { AppMessage } from 'src/app/model/app.message';
-import { map, mergeMap, catchError, retryWhen, concatMap, retry } from 'rxjs/operators';
+import { map, mergeMap, catchError, concatMap, retry } from 'rxjs/operators';
 import { Observable, forkJoin, of, throwError } from 'rxjs';
 import { NotificationType } from 'src/app/config/notificationtype';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -20,6 +20,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class CalenderViewComponent implements OnInit {
 
+  currDate = moment(new Date()).startOf("days");
+  endDate = this.currDate.clone().add(1, "month").startOf("days");
   calendarPlugins = [dayGridPlugin];
   flightList: any[] = [];
   /**
@@ -51,14 +53,13 @@ export class CalenderViewComponent implements OnInit {
    */
   SearchFlightFares() {
     if (this.originPlace.placeId != this.destinationPlace.placeId) {
-      this.messageService.sendMessage(new AppMessage(GlobalMessages.displayPageLoader,{}));
+      this.messageService.sendMessage(new AppMessage(GlobalMessages.displayPageLoader, {}));
       let observableList: Observable<any>[] = [];
       this.flightList = [];
-      let currDate = moment(new Date()).startOf("days");
-      let endDate = currDate.clone().add(1, "month").startOf("days");
-      while (currDate.diff(endDate) < 0) {
-        observableList.push(this.FetchFlightDetails(currDate.clone()));
-        currDate.add(1, 'days');
+
+      while (this.currDate.diff(this.endDate) < 0) {
+        observableList.push(this.FetchFlightDetails(this.currDate.clone()));
+        this.currDate.add(1, 'days');
       }
 
       forkJoin(observableList).subscribe((dataList: any[]) => {
@@ -67,21 +68,21 @@ export class CalenderViewComponent implements OnInit {
             this.FormatData(data, moment(data.Query.OutboundDate));
           });
         }
-        this.messageService.sendMessage(new AppMessage(GlobalMessages.hidePageLoader,{}));
-      },(error:HttpErrorResponse) =>{
-        this.messageService.sendMessage(new AppMessage(GlobalMessages.hidePageLoader,{}));
-        if(error.status==901){
-          this.messageService.sendMessage(new AppMessage(GlobalMessages.showNotification,{
-            messageType:NotificationType.Error,
-            message:error.error
+        this.messageService.sendMessage(new AppMessage(GlobalMessages.hidePageLoader, {}));
+      }, (error: HttpErrorResponse) => {
+        this.messageService.sendMessage(new AppMessage(GlobalMessages.hidePageLoader, {}));
+        if (error.status == 901) {
+          this.messageService.sendMessage(new AppMessage(GlobalMessages.showNotification, {
+            messageType: NotificationType.Error,
+            message: error.error
           }));
-        }else{
-          this.messageService.sendMessage(new AppMessage(GlobalMessages.showNotification,{
-            messageType:NotificationType.Error,
-            message:error.message
+        } else {
+          this.messageService.sendMessage(new AppMessage(GlobalMessages.showNotification, {
+            messageType: NotificationType.Error,
+            message: error.message
           }));
         }
-        
+
       });
     }
   }
@@ -102,15 +103,15 @@ export class CalenderViewComponent implements OnInit {
           }
         }),
         mergeMap(sessionKey => this.skyscannerService.PollSessionResult(sessionKey)),
-        concatMap((response:any) => response.Status === "UpdatesComplete" ?
-            of(response) :
-            throwError(new HttpErrorResponse({
-              status:901,
-              error:"Incomplete update"
-            }))),
+        concatMap((response: any) => response.Status === "UpdatesComplete" ?
+          of(response) :
+          throwError(new HttpErrorResponse({
+            status: 901,
+            error: "Data update incomplete"
+          }))),
         map(response => response),
         retry(FlightFareConstant.failedServiceNoOfRetry),
-        catchError(error =>{
+        catchError(error => {
           return throwError(error);
         })
       )
@@ -128,7 +129,7 @@ export class CalenderViewComponent implements OnInit {
     if (legsDetails) {
       let depertureTime = moment(legsDetails.Departure).format("hh:mm:ss a");
       let carrier: any = this.appDataService.FindCarrier(legsDetails.Carriers[0], data.Carriers);
-      title = `${carrier.Name} \n Deperture Time: ${depertureTime} \n Price: ${minPrice.Price} ${FlightFareConstant.default_data.currency}`;
+      title = `${carrier.Name} \n Deperture: ${depertureTime} \n Price: ${minPrice.Price} ${FlightFareConstant.default_data.currency}`;
     } else {
       title = `Price: ${minPrice.Price} ${FlightFareConstant.default_data.currency}`;
     }

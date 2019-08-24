@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FullCalendarModule } from '@fullcalendar/angular';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CalenderViewComponent } from './component/calender-view/calender-view.component';
 import { SearchViewComponent } from './component/search-view/search-view.component';
@@ -25,8 +24,7 @@ import { NotificationViewComponent } from './component/notification-view/notific
     BrowserAnimationsModule ,
     FormsModule,
     HttpClientModule,
-    FullCalendarModule,
-    AppRoutingModule
+    FullCalendarModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

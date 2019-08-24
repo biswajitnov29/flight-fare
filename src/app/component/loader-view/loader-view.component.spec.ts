@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoaderViewComponent } from './loader-view.component';
+import { MessageService } from 'src/app/service/message.service';
 
 describe('LoaderViewComponent', () => {
   let component: LoaderViewComponent;
@@ -8,7 +9,8 @@ describe('LoaderViewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoaderViewComponent ]
+      declarations: [ LoaderViewComponent ],
+      providers:[MessageService]
     })
     .compileComponents();
   }));
