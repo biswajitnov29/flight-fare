@@ -13,7 +13,7 @@ Display flights fares for selected month in calendar view
 - [Run Application](#run-application)
 - [Build Application](#build-application)
 - [Running Unit Tests](#running-unit-tests)
-- [Running e2e tests] (#running-e2e-tests)
+- [Running e2e Tests](#running-e2e-tests)
 
 ## Feature's included
 
