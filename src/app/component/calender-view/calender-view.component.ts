@@ -9,7 +9,9 @@ import { MessageService } from 'src/app/service/message.service';
 import { GlobalMessages } from 'src/app/config/globalMessages.model';
 import { AppMessage } from 'src/app/model/app.message';
 import { map, mergeMap, catchError, retryWhen, concatMap, retry } from 'rxjs/operators';
-import { Observable, forkJoin, of } from 'rxjs';
+import { Observable, forkJoin, of, throwError } from 'rxjs';
+import { NotificationType } from 'src/app/config/notificationtype';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-calender-view',
@@ -66,9 +68,20 @@ export class CalenderViewComponent implements OnInit {
           });
         }
         this.messageService.sendMessage(new AppMessage(GlobalMessages.hidePageLoader,{}));
-      },(error) =>{
-
+      },(error:HttpErrorResponse) =>{
         this.messageService.sendMessage(new AppMessage(GlobalMessages.hidePageLoader,{}));
+        if(error.status==901){
+          this.messageService.sendMessage(new AppMessage(GlobalMessages.showNotification,{
+            messageType:NotificationType.Error,
+            message:error.error
+          }));
+        }else{
+          this.messageService.sendMessage(new AppMessage(GlobalMessages.showNotification,{
+            messageType:NotificationType.Error,
+            message:error.message
+          }));
+        }
+        
       });
     }
   }
@@ -91,9 +104,15 @@ export class CalenderViewComponent implements OnInit {
         mergeMap(sessionKey => this.skyscannerService.PollSessionResult(sessionKey)),
         concatMap((response:any) => response.Status === "UpdatesComplete" ?
             of(response) :
-            Observable.throw("Incomplete update")),
+            throwError(new HttpErrorResponse({
+              status:901,
+              error:"Incomplete update"
+            }))),
         map(response => response),
-        retry(FlightFareConstant.failedServiceNoOfRetry)
+        retry(FlightFareConstant.failedServiceNoOfRetry),
+        catchError(error =>{
+          return throwError(error);
+        })
       )
   }
 

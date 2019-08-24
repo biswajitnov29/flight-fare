@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -10,16 +11,18 @@ import { CalenderViewComponent } from './component/calender-view/calender-view.c
 import { SearchViewComponent } from './component/search-view/search-view.component';
 import { MessageService } from 'src/app/service/message.service';
 import { LoaderViewComponent } from './component/loader-view/loader-view.component';
+import { NotificationViewComponent } from './component/notification-view/notification-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CalenderViewComponent,
     SearchViewComponent,
-    LoaderViewComponent
+    LoaderViewComponent,
+    NotificationViewComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserAnimationsModule ,
     FormsModule,
     HttpClientModule,
     FullCalendarModule,
